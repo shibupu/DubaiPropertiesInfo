@@ -25,7 +25,7 @@ a {
     background: #5b6471 url(../images/main_bg.jpg) no-repeat center center;
     background-size: cover;
     color: #fff;
-    height: 229px;
+    height: 300px;
     position: relative;
     float: left;
     width: 100%;
@@ -63,36 +63,15 @@ a {
     color: #ff0000;
     font-weight: 300;
 }
-.search_wrap {
-    width: 800px;
-    height: 50px;
-    margin: 0 auto;
-    margin-top: 40px;
-}
-.search_wrap input[type="text"] {
-    height: 50px;
-    background-color: #fff;
-    width: 300px;
-    color: #000;
-    float: left;
-    font-weight: 300;
-    margin-right: 20px;
-    font-size: 18px;
-    text-indent: 20px;
-}
-.search_wrap input[type="submit"] {
-    background-color: #ff9800;
-    padding: 12px 40px;
+.send_btn {
+    background-color: #96855a;
+    padding: 6px 24px;
     float: left;
     font-weight: 400;
-    margin-right: 20px;
     font-size: 18px;
     border-style: none;
     transition: all .4s;
-}
-.search_wrap input[type="submit"]: hover {
-    background-color: #000;
-}
+}`
 .home_tabs {
     width: 100%;
     margin: 30px 0px;
@@ -120,7 +99,7 @@ a {
     color: #ff9900;
 }
 footer {
-    margin: 50px 0;
+    margin: 20px 0;
 }
 .inner_banner {
     background-color: #000;
