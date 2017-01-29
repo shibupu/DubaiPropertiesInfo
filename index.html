@@ -35,6 +35,79 @@
         <!-- Google Analytics -->
         <script>
         </script>
+        <script type="text/javascript">
+            function send_message() {
+                var full_name = $.trim($("#full_name").val());
+                if (full_name === '') {
+                    alert('Please enter full name.');
+                    $("#full_name").focus();
+                    $("#full_name").val('');
+                    return 0;
+                }
+
+                var email = $.trim($("#email").val());
+                /*if (email === '') {
+                    alert('Please enter email address.');
+                    $("#email").focus();
+                    $("#email").val('');
+                    return 0;
+                }*/
+                if (email && !is_valid_email(email)) {
+                    alert('Please enter valid email address.');
+                    $("#email").focus();
+                    $("#email").val('');
+                    return 0;
+                }
+
+                var mobile = $.trim($("#mobile").val());
+                if (mobile === '') {
+                    alert('Please enter mobile number.');
+                    $("#mobile").focus();
+                    $("#mobile").val('');
+                    return 0;
+                }
+                if (!is_valid_mobile(mobile)) {
+                    alert('Please enter valid mobile number.');
+                    $("#mobile").focus();
+                    $("#mobile").val('');
+                    return 0;
+                }
+
+                var message = $.trim($("#message").val());
+                if (message === '') {
+                    alert('Please enter your message.');
+                    $("#message").focus();
+                    $("#message").val('');
+                    return 0;
+                }
+
+                $("#result").html('Please wait...')
+
+                var data = {"full_name": full_name, "email": email, "mobile": mobile, "message": message, "send": 1};
+                $.post("mail.php", data, function(res) {
+                    $("#result").html(res);
+                });
+            }
+
+            function is_valid_email(email) {
+                var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                return regex.test(email);
+            }
+
+            function is_valid_mobile(mobile) {
+                var regex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+                return regex.test(mobile);
+            }
+
+            $(document).ready(function() {
+                $("#mobile").keypress(function (e) {
+                    // We should allow backspace, tab left/right arrows and delete key
+                    var unicode = e.charCode ? e.charCode : e.keyCode;
+                    if (e.key.match(/[^0-9\.\-]/g) && unicode != 8 && unicode != 9 && unicode != 37 && unicode != 39 && unicode != 46)
+                        return false;
+                });
+            });
+        </script>
     </head>
 
     <body>
@@ -73,17 +146,17 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <ul>
-                                            <li>admin@dubaipropertiesinfo.com</li>
                                             <li>dubaipropertiesinfo@gmail.com</li>
                                             <li>050 903 9860</li>
                                         </ul>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><input type="text" name="full_name" placeholder="Full name" /></p>
-                                        <p><input type="email" name="email" placeholder="Email address" /></p>
-                                        <p><input type="tel" name="mobile" placeholder="Mobile number" /></p>
-                                        <p><textarea name="message" placeholder="Your message"></textarea></p>
-                                        <p><input type="button" value="Send" class="send_btn" /></p>
+                                        <p><input type="text" name="full_name" id="full_name" placeholder="Full name" /></p>
+                                        <p><input type="email" name="email" id="email" placeholder="Email address" /></p>
+                                        <p><input type="tel" name="mobile" id="mobile" placeholder="Mobile number" /></p>
+                                        <p><textarea name="message" id="message" placeholder="Your message"></textarea></p>
+                                        <p id="result"></p>
+                                        <p><input type="button" value="Send" class="send_btn" onclick="send_message();" /></p>
                                     </div>
                                 </div>
                             </div>
